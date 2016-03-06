@@ -1,0 +1,3 @@
+.input-group.multiple-input .form-control:not(:first-child) {
+    margin-left: -1px;
+}
