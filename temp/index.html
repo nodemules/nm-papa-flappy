@@ -7,44 +7,15 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="app.css">
-        <script src="app.js"></script>
+        <script type="text/javascript" src="app.js"></script>
+        <script type="text/javascript" src="controller.js"></script>
         <script type="text/javascript" src="service.js"></script>
         <script src="constants.js"></script>
     </head>
-    <body ng-app="flapperNewsApp" ng-controller="MainCtrl">
+    <body ng-app="flapperNewsApp">
         <div class="row">
             <div class="col-md-offset-3 col-md-6">
-                <div class="col-xs-12">
-                    <div class="page-header">
-                        <h3>
-                            {{title}}
-                        </h3>
-                    </div>
-                </div>
-                <div class="col-xs-12">
-                    <div class="alert alert-danger" ng-repeat="err in errors">
-                        {{err}} <br />
-                    </div>
-                    <form ng-submit="addPost(newPost)" name="addPostForm" class="form-horizontal col-xs-12">
-                        <div class="form-group">
-                            <div class="input-group multiple-input">
-                                <input class="form-control" required type="text" placeholder="Title" ng-model="newPost.title" />
-                                <span class="input-group-btn" style="width:0px;"></span>
-                                <input class="form-control" required type="url" placeholder="Link" ng-model="newPost.path" />
-                                <span class="input-group-btn">
-                                    <button class="btn btn-primary" type="submit" ng-disabled="addPostForm.$invalid">Add a new post!</button>
-                                </span>
-                            </div>
-                        </div>
-                    </form>
-                    <div ng-show="!ready">
-                        <span class="fa fa-spinner fa-spin"></span> Loading latest posts...
-                    </div>
-                    <div ng-repeat="post in posts | orderBy: '-upvotes'" ng-show="ready">
-                        <span class="fa fa-thumbs-up" ng-click="upVote(post)"></span>
-                        {{post.upvotes}} - <a ng-href="{{post.path}}">{{post.title}}</a> by {{post.createUser}}
-                    </div>
-                </div>
+                <ui-view></ui-view>
             </div>
         </div>
     </body>

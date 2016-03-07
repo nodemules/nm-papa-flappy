@@ -4,68 +4,26 @@
 
     var app = angular.module('flapperNewsApp', ['ngResource', 'ui.router']);
     
-    app.controller('MainCtrl', MainCtrl);
+    app.config(States);
     
-    MainCtrl.$inject = ['$scope', '$http', 'Posts'];
+    States.$inject = ['$stateProvider', '$urlRouterProvider'];
     
-    function MainCtrl($scope, $http, Posts) {
+    function States($stateProvider, $urlRouterProvider) {
         
-        $scope.ready = false;
-        
-        $scope.title = 'Flappy posts!';
-        
-        $scope.posts = [];
-        
-        $scope.$watch(function() {
-            return Posts.posts.get;
-        }, function(n,o) {
-            $scope.posts = n;
-        });
-        
-        $scope.$watch(function() {
-            return Posts.errors.get;
-        }, function(n, o) {
-            $scope.errors = n;
-        })
-        
-        $scope.errors = [];
-        
-        var POST_DATA = [];
-        
-        /*
-         * PUBLIC FUNCTIONS
-         */
-        
-        $scope.generatePosts = function(num) {
-            Posts.generatePosts(num);
-        };
-        
-        $scope.addPost = function(post) {
-            post.upvotes = Math.floor(Math.random() * 100);
-            post.createUser = 'testUser';
-            
-            $scope.posts.push(post);
-            $scope.newPost = null;
-        };
-        
-        $scope.upVote = function(post) {
-            post.upvotes += 1;
-        };
-        
-        /*
-         * PRIVATE FUNCTIONS
-         */
-        
-        function initCtrl() {
-            Posts.generatePosts(25, function(data) {
-                $scope.ready = true;
+        $stateProvider
+            .state('home', {
+                url : '/home',
+                templateUrl: '/temp/home.html',
+                controller : 'MainCtrl'
+            })
+            .state('posts', {
+                url : '/posts/{id}',
+                templateUrl: '/temp/posts.html',
+                controller: 'PostsCtrl'
             });
-        }
-        
-        angular.element(document).ready(function() {
-            initCtrl();
-        });
-        
+            
+            $urlRouterProvider.otherwise('home');
+            
     }
     
 })(angular);
