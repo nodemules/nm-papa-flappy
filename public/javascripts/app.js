@@ -13,16 +13,16 @@
         $stateProvider
             .state('home', {
                 url : '/home',
-                templateUrl: '/temp/home.html',
+                templateUrl: '/views/home.html',
                 controller : 'MainCtrl'
             })
             .state('posts', {
                 url : '/posts/{id}',
-                templateUrl: '/temp/posts.html',
+                templateUrl: '/posts.html',
                 controller: 'PostsCtrl'
             });
             
-            $urlRouterProvider.otherwise('home');
+        $urlRouterProvider.otherwise('home');
             
     }
     
